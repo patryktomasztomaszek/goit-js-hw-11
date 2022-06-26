@@ -1,0 +1,68 @@
+@import '~node_modules/modern-normalize/modern-normalize.css';
+.gallery {
+  display: flex;
+  padding-top: 50px;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.gallery__item {
+  display: flex;
+  flex-flow: column nowrap;
+  height: 250px;
+  width: 350px;
+}
+.gallery__image {
+  display: block;
+  height: 200px;
+  width: 350px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.gallery .info {
+  border: 1px solid rgba(128, 128, 128, 0.5);
+  border-top: none;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  height: 50px;
+  margin-top: 0;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.search-form {
+  width: 100vw;
+  height: 50px;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(127, 127, 127, 0.5);
+}
+.search-form__input {
+  width: 250px;
+  height: 35px;
+  border: none;
+  text-align: center;
+  margin-left: 2px;
+}
+.search-form__button {
+  position: relative;
+  width: 35px;
+  height: 35px;
+  border: none;
+}
+.search-form__button::after {
+  content: url("../img/search-icon.svg");
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  fill: #000;
+  width: 35px;
+  height: 35px;
+}/*# sourceMappingURL=index.css.map */

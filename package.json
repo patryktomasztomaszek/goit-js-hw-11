@@ -1,7 +1,7 @@
 {
   "name": "goit-js-hw-11",
   "version": "2.0.0",
-  "description": "",
+  "description": "Zadanie domowe JavaScript 11",
   "homepage": "https://github.com/patryktomasztomaszek/goit-js-hw-11",
   "scripts": {
     "start": "parcel src/*.html",
@@ -18,13 +18,23 @@
     "url": "https://github.com/patryktomasztomaszek/goit-js-hw-11"
   },
   "dependencies": {
-    "modern-normalize": "^1.1.0"
+    "axios": "^0.27.2",
+    "lodash.throttle": "^4.1.1",
+    "modern-normalize": "^1.1.0",
+    "notiflix": "^3.2.5",
+    "simplelightbox": "^2.10.3",
+    "throttle": "^1.0.3"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.5.0",
+    "assert": "^2.0.0",
+    "buffer": "^6.0.3",
     "parcel": "^2.5.0",
     "parcel-reporter-clean-dist": "^1.0.4",
-    "posthtml-include": "^1.7.4"
+    "posthtml-include": "^1.7.4",
+    "process": "^0.11.10",
+    "stream-browserify": "^3.0.0",
+    "util": "^0.12.4"
   },
   "browserslist": "> 0.5%, last 2 versions, not dead"
 }

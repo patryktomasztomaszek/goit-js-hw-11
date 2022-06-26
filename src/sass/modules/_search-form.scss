@@ -1,0 +1,35 @@
+.search-form {
+  width: 100vw;
+  height: 50px;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(127, 127, 127, 0.5);
+
+  &__input {
+    width: 250px;
+    height: 35px;
+    border: none;
+    text-align: center;
+    margin-left: 2px;
+  }
+
+  &__button {
+    position: relative;
+    width: 35px;
+    height: 35px;
+    border: none;
+
+    &::after {
+      content: url('../img/search-icon.svg');
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      fill: #000;
+      width: 35px;
+      height: 35px;
+    }
+  }
+}
