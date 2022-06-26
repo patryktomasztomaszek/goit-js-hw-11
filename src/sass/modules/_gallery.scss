@@ -29,7 +29,11 @@
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     text-align: center;
+    &__item {
+      display: flex;
+      flex-flow: column nowrap;
+    }
   }
 }
