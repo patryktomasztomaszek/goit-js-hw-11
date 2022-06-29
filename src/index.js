@@ -1,26 +1,27 @@
-document.cookie = null;
-
 // initializing libraries
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import { throttle } from 'lodash.throttle';
 
 // Initializing internal scripts
-import { getImages } from './js/getImages.js';
+import { getImages } from './js/pixabay-api-handler.js';
 import { renderImages } from './js/renderImages.js';
+import { favButtonsAndLightboxHandler } from './js/favButonsAndLightboxHandler.js';
+import { displayFavorites } from './js/favoritesHandler.js';
 
 // Seleting search form elements
 const input = document.querySelector('[search-input]');
 const submit = document.querySelector('[search-submit]');
 
+// Selecting Favorite button
+const favButton = document.querySelector('[display-favorites]');
+
 // Selecting search result display
-const display = document.querySelector('[display]');
+export const display = document.querySelector('[display]');
 
 // Variables
 let searchQuery = '';
-let pageCount = 1;
-let lightbox;
+export let pageCount = 1;
 
 // Function for purging display and resetting page count
 function resetSearch() {
@@ -28,8 +29,37 @@ function resetSearch() {
   pageCount = 1;
 }
 
+// Function for infinite scrolling
+function loadMore() {
+  if (
+    window.scrollY + window.innerHeight >=
+    document.documentElement.scrollHeight - 5
+  ) {
+    pageCount++;
+    getImages(searchQuery, pageCount)
+      .then(response => {
+        // Ckeching for end of hits,
+        // Then removing infinite scroll listener
+        if (response.data.hits.length < 40) {
+          Notify.info(
+            "We're sorry, but you've reached the end of search results."
+          );
+          window.removeEventListener('scroll', loadMore, { passive: true });
+        }
+        display.insertAdjacentHTML(
+          'beforeend',
+          renderImages(response.data.hits)
+        );
+        favButtonsAndLightboxHandler();
+        console.log('handling favs & lbox');
+      })
+      .catch(error => console.error(error));
+  }
+}
+
+// - - - - - MAIN FUNCTION - - - - -
 // Search event handler
-const searchEventHandler = event => {
+function searchEventHandler(event) {
   event.preventDefault();
   resetSearch();
 
@@ -52,12 +82,8 @@ const searchEventHandler = event => {
     Notify.success(`Hooray! We found ${response.data.totalHits} images.`);
     display.insertAdjacentHTML('beforeend', renderImages(response.data.hits));
 
-    if (typeof lightbox === 'object') {
-      lightbox.destroy();
-    }
-    lightbox = new SimpleLightbox('.gallery__item a');
+    favButtonsAndLightboxHandler();
 
-    // Initializing infinite scroll listener
     if (response.data.totalHits > 40) {
       window.addEventListener('scroll', loadMore, { passive: true });
     }
@@ -73,36 +99,26 @@ const searchEventHandler = event => {
       });
     }
   });
-};
+}
+
+// - - - - - MAIN FUNCTION END - - - - -
 
 // initializing serach form event listener
 submit.addEventListener('click', searchEventHandler);
 
-const loadMore = () => {
-  if (
-    window.scrollY + window.innerHeight >=
-    document.documentElement.scrollHeight - 5
-  ) {
-    pageCount++;
-    getImages(searchQuery, pageCount)
-      .then(response => {
-        // Ckeching for end of hits,
-        // Then removing infinite scroll listener
-        if (response.data.hits.length < 40) {
-          Notify.info(
-            "We're sorry, but you've reached the end of search results."
-          );
-          window.removeEventListener('scroll', loadMore, { passive: true });
-        }
-        display.insertAdjacentHTML(
-          'beforeend',
-          renderImages(response.data.hits)
-        );
-        if (typeof lightbox === 'object') {
-          lightbox.destroy();
-        }
-        lightbox = new SimpleLightbox('.gallery__item a');
-      })
-      .catch(error => console.error(error));
+// - - - - - TEST GROUND - - - - -
+// Function for handling favorites display
+function favDisplayHandler() {
+  window.removeEventListener('scroll', loadMore, { passive: true });
+  resetSearch();
+
+  if (JSON.parse(localStorage.getItem('favorites-array')).length !== 0) {
+    displayFavorites();
+  } else {
+    Notify.info(
+      'Your favorites list is empty! Find something you love... And add it!'
+    );
   }
-};
+}
+//  Setting event listener on favorite button
+favButton.addEventListener('click', favDisplayHandler);

@@ -9,6 +9,7 @@ export function renderImages(data) {
         views,
         comments,
         downloads,
+        id,
       }) =>
         `
         <div class="gallery__item">
@@ -33,8 +34,9 @@ export function renderImages(data) {
            <p class="info__item">
              <b>Downloads</b>
              <span class="info__counter">${downloads}</span>
-  
+             
            </p>
+           <button class="info__fav-button" id="${id}"></button>
         </div>
       </div>
       `

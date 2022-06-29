@@ -35,5 +35,16 @@
       display: flex;
       flex-flow: column nowrap;
     }
+
+    &__fav-button {
+      background: url(../img/heart.png);
+      filter: grayscale(1);
+      background-size: contain;
+      background-repeat: no-repeat;
+      height: 30px;
+      width: 30px;
+      border: 0;
+      padding: 0;
+    }
   }
 }

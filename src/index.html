@@ -8,18 +8,25 @@
     <title>goit-js-hw-11</title>
   </head>
   <body>
-    <form class="search-form" search-form>
-      <input
-        class="search-form__input"
-        type="text"
-        name="searchQuery"
-        autocomplete="off"
-        placeholder="Search images..."
-        search-input
-        maxlength="100"
-      />
-      <button class="search-form__button" type="submit" search-submit></button>
-    </form>
+    <div class="container">
+      <form class="search-form" search-form>
+        <input
+          class="search-form__input"
+          type="text"
+          name="searchQuery"
+          autocomplete="off"
+          placeholder="Search images..."
+          search-input
+          maxlength="100"
+        />
+        <button
+          class="search-form__button"
+          type="submit"
+          search-submit
+        ></button>
+      </form>
+      <button class="favorites" display-favorites></button>
+    </div>
     <div class="gallery" display></div>
     <script src="./index.js" type="module"></script>
   </body>
