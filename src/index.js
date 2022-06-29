@@ -51,7 +51,6 @@ function loadMore() {
           renderImages(response.data.hits)
         );
         favButtonsAndLightboxHandler();
-        console.log('handling favs & lbox');
       })
       .catch(error => console.error(error));
   }
@@ -112,7 +111,9 @@ function favDisplayHandler() {
   window.removeEventListener('scroll', loadMore, { passive: true });
   resetSearch();
 
-  if (JSON.parse(localStorage.getItem('favorites-array')).length !== 0) {
+  const favArray = JSON.parse(localStorage.getItem('favorites-array'));
+
+  if (favArray === null || favArray !== 0) {
     displayFavorites();
   } else {
     Notify.info(

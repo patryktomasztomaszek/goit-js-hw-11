@@ -7,7 +7,7 @@ import { addOrRemoveToFavorites } from './favoritesHandler.js';
 // And resetting lightbox
 export function favButtonsAndLightboxHandler() {
   // Looking for favorites button
-  favoritesArray = document.querySelectorAll('.info__fav-button');
+  const favoritesArray = document.querySelectorAll('.info__fav-button');
 
   // Set event listeners for favorite buttons
   for (button of favoritesArray) {
