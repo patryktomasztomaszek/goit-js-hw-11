@@ -1,4 +1,4 @@
-// Local storage key for favorites: 'favorites-array'
+// !!!IMPOE Local storage key for favorites: 'favorites-array'
 
 // Initializing internal scripts
 import { getFavorites } from './pixabay-api-handler.js';

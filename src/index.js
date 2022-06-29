@@ -29,6 +29,13 @@ function resetSearch() {
   pageCount = 1;
 }
 
+// Check for 'favorite-array' key in local storage,
+// if null , create key with '[]' value
+if (localStorage.getItem('favorites-array') === null) {
+  localStorage.setItem('favorites-array', '[]');
+  console.log('Ls created');
+}
+
 // Function for infinite scrolling
 function loadMore() {
   if (
