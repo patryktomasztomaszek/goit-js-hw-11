@@ -3,6 +3,9 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { addOrRemoveToFavorites } from './favoritesHandler.js';
 
+// Variable for lightbox
+let lightbox = new SimpleLightbox('.gallery__item a');
+
 // Function for Handling favorite button on each image,
 // And resetting lightbox
 export function favButtonsAndLightboxHandler() {
@@ -10,7 +13,7 @@ export function favButtonsAndLightboxHandler() {
   const favoritesArray = document.querySelectorAll('.info__fav-button');
 
   // Set event listeners for favorite buttons
-  for (button of favoritesArray) {
+  for (const button of favoritesArray) {
     button.addEventListener('click', addOrRemoveToFavorites);
     if (
       JSON.parse(localStorage.getItem('favorites-array')).includes(button.id)
