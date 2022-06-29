@@ -7,6 +7,7 @@ import {
   favButtonsAndLightboxHandler,
   // displayHeartIfInArray,
 } from './favButonsAndLightboxHandler.js';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 // Variable for handling local web storage
 let favoritesArrayBuffer = [];
@@ -73,6 +74,13 @@ export function addOrRemoveToFavorites(event) {
 export function displayFavorites() {
   updateBuffer();
   displayFavBuffer = [];
+
+  // check if favorites are empty
+  if (favoritesArrayBuffer.length === 0) {
+    return Notify.info(
+      'Favorites list is empty! Find something You LOVE (for example - type "cat") ... And add it!'
+    );
+  }
 
   for (const id of favoritesArrayBuffer) {
     if (id !== undefined || id !== null) {
